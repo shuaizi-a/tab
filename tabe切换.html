@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tab切换</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        /* 清除浮动 */
+        .clearfix:after{
+	        visibility:hidden;
+	        clear:both;
+	        display:block;
+	        content:".";
+	        height:0;
+        }.clearfix{
+	        *zoom:1;
+        }
+        /* 第一种方法 */
+        .arr{
+            width: 400px;
+            background-color: pink;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .tab{
+            width: 400px;
+            height: 60px;
+        }
+        .tab ul li{
+            width: 100px;
+            height: 60px;
+            float: left;
+            line-height: 60px;
+            text-align: center;
+            cursor: pointer;
+        }
+        /* 背景颜色 */
+        .tab ul .bj{
+            background: green;
+        }
+        /* name */
+        .name{
+            width: 400px;
+        }
+        .name ul li{
+            float: left;
+            width: 400px;
+            height: 400px;
+            background-color: blueviolet;
+            display: none;
+            line-height: 400px;
+            text-align: center;
+        }
+        .name ul .xs{
+            display: block
+        }
+
+        /* 第二种方法 */
+        .brr{
+            width: 400px;
+            background-color: pink;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        .tab2{
+            width: 400px;
+            height: 60px;
+        }
+        .tab2 ul li{
+            width: 100px;
+            height: 60px;
+            float: left;
+            line-height: 60px;
+            text-align: center;
+            cursor: pointer;
+        }
+        /* 背景颜色 */
+        .tab2 ul .bj2{
+            background: green;
+        }
+        /* name */
+        .name2{
+            width: 400px;
+        }
+        .name2 ul li{
+            float: left;
+            width: 400px;
+            height: 400px;
+            background-color: blueviolet;
+            display: none;
+            line-height: 400px;
+            text-align: center;
+        }
+        .name2 ul .xs2{
+            display: block
+        }
+    </style>
+</head>
+<body>
+    <!-- 第一种方法 -->
+    <div class="arr">
+        <div class="tab">
+            <ul id="uu">
+                <li class="bj">模块1</li>
+                <li>模块2</li>
+                <li>模块3</li>
+                <li>模块4</li>
+            </ul>
+        </div>
+        <div class="name clearfix">
+            <ul id="uu2">
+                <li class="xs">模块1</li>
+                <li>模块2</li>
+                <li>模块3</li>
+                <li>模块4</li>
+            </ul>
+        </div>
+    </div>
+    <!-- 第二种方法 -->
+    <div class="brr">
+        <div class="tab2">
+             <ul id="ll">
+                <li class="bj2">模块1</li>
+                <li>模块2</li>
+                <li>模块3</li>
+                <li>模块4</li>
+            </ul>
+        </div>
+        <div class="name2 clearfix">
+                <ul id="ll2">
+                    <li class="xs2">模块1</li>
+                    <li>模块2</li>
+                    <li>模块3</li>
+                    <li>模块4</li>
+                </ul>
+        </div>
+    </div>
+    <script>
+                        // 第一种方法
+    // 获取tab
+    var tabe = document.getElementById("uu").getElementsByTagName("li");
+    // 获取name
+    var qiehuan = document.getElementById("uu2").getElementsByTagName("li");
+     
+        for(var i=0; i<tabe.length;i++ ) {
+
+            tabe[i].onclick = function() {
+                for(var i=0; i<tabe.length;i++  ) {
+                    //判断点击的li是几
+                    if(tabe[i] == this ) {
+                        tabe[i].className = "bj";
+                        qiehuan[i].className = "xs";
+                    }else{
+                        tabe[i].className = "";
+                        qiehuan[i].className = "";
+                    }
+                };
+            }
+           
+        }
+                            // 第二种方法
+    // 获取tabe2
+    var tabe2 = document.getElementById("ll").getElementsByTagName("li");
+    // 获取name2
+    var qiehuan2 = document.getElementById("ll2").getElementsByTagName("li");
+
+        for(var i=0; i<tabe2.length;i++ ) {
+            // 设置tabe2的索引值
+            tabe2[i].setAttribute("index",i);
+
+            tabe2[i].onclick = function() {
+                // 所有的span的样式移除
+                for(var i=0; i<tabe2.length;i++ ){
+                    // 先隐藏li标签
+                    tabe2[i].removeAttribute("class");
+                }
+                    // 显示当前被点的应用这个样式
+                    this.className =  "bj2";
+
+                // 把tabe2设置的自定义索引值拿出来
+                var num = this.getAttribute("index");
+
+                for(var i=0;i<qiehuan2.length;i++) {
+                    // 先隐藏li标签
+                    qiehuan2[i].removeAttribute("class");
+                }
+                    //显示点击后低下对应的li标签的样式
+                    qiehuan2[num].className = "xs2";
+            }
+        }
+    </script>
+</body>
+</html>
